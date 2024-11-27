@@ -13,6 +13,16 @@ public class Cellule {
     private boolean devoilee;
     private int bombesAutour;
     
+    /*
+        constructeur vraiment utile ?
+        bool initialisé par defaut à false
+        bombesAutour à voir apres.
+    public Cellule(int bombesAutour){
+        this.presenceBombe = false;
+        this.devoilee = false;
+        this.bombesAutour = bombesAutour;
+    }*/
+    
     //getters
     public boolean getPresenceBombre(){
         return presenceBombe;
@@ -30,4 +40,8 @@ public class Cellule {
         devoilee = true;
     }
     
+    //setter
+    public void SetBombesAutour(int bombesAutour){
+        this.bombesAutour = bombesAutour;
+    }
 }
