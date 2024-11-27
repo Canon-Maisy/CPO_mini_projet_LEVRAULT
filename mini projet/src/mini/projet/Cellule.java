@@ -13,35 +13,45 @@ public class Cellule {
     private boolean devoilee;
     private int bombesAutour;
     
-    /*
-        constructeur vraiment utile ?
-        bool initialisé par defaut à false
-        bombesAutour à voir apres.
-    public Cellule(int bombesAutour){
-        this.presenceBombe = false;
-        this.devoilee = false;
-        this.bombesAutour = bombesAutour;
-    }*/
     
-    //getters
+    //presence Bombe
+    //getter
     public boolean getPresenceBombre(){
         return presenceBombe;
     }
+    //setter
+        public void placerBombe(){
+        presenceBombe = true;
+    }
+       
+        
+    //bombes autour
+    //getter
     public int getBombesAutour(){
         return bombesAutour;
     }
-    
-    //changer le statut de la bombe
-    public void placerBombe(){
-        presenceBombe = true;
+    //setter
+    public void SetBombesAutour(int nbbombesAutour){
+        this.bombesAutour = nbbombesAutour;
     }
     
+    
+    //reveler cellule
     public void revelerCellule(){
         devoilee = true;
     }
     
-    //setter
-    public void SetBombesAutour(int bombesAutour){
-        this.bombesAutour = bombesAutour;
+    //toString
+    @Override
+    public String toString(){
+        if (!devoilee){
+            return "?"; //pas dévoilée
+        }else if (presenceBombe){
+            return "B"; //dévoilée + bombe
+        }else if (bombesAutour > 0){
+            return bombesAutour + ""; //dévoilée + pas de bombes
+        }else {
+            return " "; //dévoilée + pas de bombes + 0 bombes adjacentes
+        }
     }
 }
