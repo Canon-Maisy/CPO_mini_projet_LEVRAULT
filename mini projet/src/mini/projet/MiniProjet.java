@@ -14,7 +14,9 @@ public class MiniProjet {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Cellule wouaf = new Cellule();
+        
+        //test classe cellule
+        /*Cellule wouaf = new Cellule();
         System.out.println("1: " + wouaf);
 
         //révelement cellule
@@ -27,7 +29,12 @@ public class MiniProjet {
 
         //placement bombe
         wouaf.placerBombe();
-        System.out.println("3: " + wouaf);
+        System.out.println("3: " + wouaf);*/
+        
+        
+        //test classe GrilleDeJeu
+        GrilleDeJeu miaou = new GrilleDeJeu(5,5);
+        miaou
     }
 
 }

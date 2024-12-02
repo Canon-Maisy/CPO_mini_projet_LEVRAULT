@@ -10,7 +10,6 @@ import java.util.Random;
  *
  * @author Maxime
  */
-
 public class GrilleDeJeu {
 
     private Cellule[][] matriceCellules;
@@ -20,7 +19,7 @@ public class GrilleDeJeu {
     private Random random; //generateur nombres aléatoires
 
     //constructeur
-    private GrilleDeJeu(int lignes, int colonnes) {
+    public GrilleDeJeu(int lignes, int colonnes) {
         this.nbLignes = lignes;
         this.nbColonnes = colonnes;
 
@@ -63,16 +62,35 @@ public class GrilleDeJeu {
             for (int colonne = 0; colonne < this.nbColonnes; colonne++) {
                 //tester si pas de bombe sur la case
                 if (matriceCellules[ligne][colonne].getPresenceBombe() == false) {
-                    int a = BombesAutour(matriceCellules[ligne][colonne]);
+                    int bombesAutour = BombesAutour(matriceCellules, ligne, colonne);
+                    //MAJ nbBombesAdj à la case donnée
+                    matriceCellules[ligne][colonne].SetBombesAutour(bombesAutour);
                 }
             }
-        } 
+        }
     }
-    
-    
-    public int BombesAutour(Cellule cellule){
-        //compte le nombre de bombes autour de la case donnée
-        
-        return 10;
+
+    public int BombesAutour(Cellule[][] tableau, int ligne, int colonne) {
+        int sommeBombes = 0;
+        for (int i = -1; i <= 1; i++) { //parcours lignes autour
+            for (int j = -1; j <= 1; j++) { //parcours colonnes autour
+                if (i == 0 || j == 0) {
+                    continue; //ignorer la case centrale
+                }
+                int voisinLigne = ligne + i;
+                int voisinColonne = colonne + j;
+
+                //bordures
+                //sans les bordures
+                if (voisinLigne >= 0 && voisinLigne < tableau.length && voisinColonne >= 0 && voisinColonne < tableau[voisinLigne].length) {
+                    //Si il y a une bombe, +1 à la somme
+                    if (tableau[ligne][colonne].getPresenceBombe()) {
+                        sommeBombes += 1;
+                    }
+                }
+            }
+        }
+        return sommeBombes;
     }
+
 }
