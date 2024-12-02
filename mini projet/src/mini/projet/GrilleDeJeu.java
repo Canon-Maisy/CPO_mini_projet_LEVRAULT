@@ -80,11 +80,9 @@ public class GrilleDeJeu {
                 int voisinLigne = ligne + i;
                 int voisinColonne = colonne + j;
 
-                //bordures
-                //sans les bordures
+
                 if (voisinLigne >= 0 && voisinLigne < tableau.length && voisinColonne >= 0 && voisinColonne < tableau[voisinLigne].length) {
-                    //Si il y a une bombe, +1 à la somme
-                    if (tableau[ligne][colonne].getPresenceBombe()) {
+                    if (tableau[ligne][colonne].getPresenceBombe()) { // test présence bombe sur cases adjointes
                         sommeBombes += 1;
                     }
                 }
