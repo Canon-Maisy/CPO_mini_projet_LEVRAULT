@@ -34,7 +34,7 @@ public class MiniProjet {
         
         //test classe GrilleDeJeu
         GrilleDeJeu miaou = new GrilleDeJeu(5,5);
-        miaou
+        miaou.calculerBombesAdj();
     }
 
 }

@@ -80,7 +80,6 @@ public class GrilleDeJeu {
                 int voisinLigne = ligne + i;
                 int voisinColonne = colonne + j;
 
-
                 if (voisinLigne >= 0 && voisinLigne < nbLignes && voisinColonne >= 0 && voisinColonne < nbColonnes) {
                     if (matriceCellules[voisinLigne][voisinColonne].getPresenceBombe()) { // test présence bombe sur cases adjointes
                         sommeBombes += 1;
@@ -89,6 +88,56 @@ public class GrilleDeJeu {
             }
         }
         return sommeBombes;
+    }
+
+    public boolean revelerCellule(int ligne, int colonne) {
+        //verifier si cellule devoilee
+        if (!matriceCellules[ligne][colonne].getdevoilee()) {
+            //révélater la case
+            matriceCellules[ligne][colonne].revelerCellule();
+
+            //verification presence bombe
+            if (matriceCellules[ligne][colonne].getPresenceBombe()) {
+                return false;
+            }
+            //verification si il y a des bombes adjacentes
+            if (matriceCellules[ligne][colonne].getBombesAutour() == 0) {
+                //parcours des cases adjacentes
+                for (int i = -1; i <= 1; i++) {
+                    for (int j = -1; j <= 1; j++) {
+                        if (i == 0 && j == 0) {
+                            continue;
+                        } //ignorer la case centrale
+
+                        int voisinLigne = ligne + i;
+                        int voisinColonne = colonne + j;
+                        //verification si case dans les bornes
+                        if (voisinLigne >= 0 && voisinLigne < nbLignes && voisinColonne >= 0 && voisinColonne < nbColonnes) {
+                            revelerCellule(voisinLigne, voisinColonne);
+                        }
+
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean getPresenceBombe(int i, int j) {
+        return matriceCellules[i][j].getPresenceBombe();
+    }
+
+    public boolean toutesCellulesRevelees() {
+        //parcours des cases de la grille
+        for (int ligne = 0; ligne < nbLignes; ligne++) {
+            for (int colonne = 0; colonne < nbColonnes; colonne++) {    
+                //test si case sans bombe et pas dévoilée
+                if (!matriceCellules[ligne][colonne].getPresenceBombe() && !matriceCellules[ligne][colonne].getdevoilee()) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
 }
