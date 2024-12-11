@@ -24,6 +24,11 @@ public class GrilleDeJeu {
         this.nbColonnes = colonnes;
 
         this.matriceCellules = new Cellule[nbLignes][nbColonnes];
+        for (int k = 0; k < nbLignes; k++) {
+            for (int i = 0; i < nbColonnes; i++) {
+                this.matriceCellules[k][i] = new Cellule();
+            }
+        }
         this.random = new Random();
     }
 
@@ -32,12 +37,21 @@ public class GrilleDeJeu {
         return nbLignes;
     }
 
+    public Cellule getCase(int ligne, int colonne){
+        return matriceCellules[ligne][colonne];
+    }
+    
     public int getNbColonnes() {
         return nbColonnes;
     }
 
     public int getNbBombes() {
         return nbBombes;
+    }
+
+    //setter
+    public void SetNbBombes(int nombre) {
+        this.nbBombes = nombre;
     }
 
     //placement des bombes aléatoirement
@@ -113,7 +127,7 @@ public class GrilleDeJeu {
                         int voisinColonne = colonne + j;
                         //verification si case dans les bornes
                         if (voisinLigne >= 0 && voisinLigne < nbLignes && voisinColonne >= 0 && voisinColonne < nbColonnes) {
-                            revelerCellule(voisinLigne, voisinColonne);
+                            revelerCellule(voisinLigne, voisinColonne); // appel récursif
                         }
 
                     }
@@ -130,7 +144,7 @@ public class GrilleDeJeu {
     public boolean toutesCellulesRevelees() {
         //parcours des cases de la grille
         for (int ligne = 0; ligne < nbLignes; ligne++) {
-            for (int colonne = 0; colonne < nbColonnes; colonne++) {    
+            for (int colonne = 0; colonne < nbColonnes; colonne++) {
                 //test si case sans bombe et pas dévoilée
                 if (!matriceCellules[ligne][colonne].getPresenceBombe() && !matriceCellules[ligne][colonne].getdevoilee()) {
                     return false;
@@ -140,4 +154,35 @@ public class GrilleDeJeu {
         return true;
     }
 
+    @Override
+    public String toString() {
+        String Affichage = "";
+        //1ere ligne
+        for (int k = 0; k < nbLignes; k++) {
+            Affichage += " -";
+        }
+        Affichage += "\n|";
+        for (int i = 0; i < nbLignes; i++) {
+            for (int j = 0; j < nbColonnes; j++) {
+                if (!matriceCellules[i][j].getdevoilee()) {
+                    Affichage += "?";
+                } else if (matriceCellules[i][j].getPresenceBombe()) {
+                    Affichage += "B";
+                } else if (matriceCellules[i][j].getBombesAutour() > 0) {
+                    Affichage += matriceCellules[i][j].getBombesAutour() + "";
+                } else {
+                    Affichage += " ";
+                }
+                Affichage += "|";
+            }
+            Affichage += "\n";
+            for (int k = 0; k < nbLignes; k++) {
+                Affichage += " -";
+            }
+            if (i != nbLignes - 1) {
+                Affichage += "\n|";
+            }
+        }
+        return Affichage;
+    }
 }

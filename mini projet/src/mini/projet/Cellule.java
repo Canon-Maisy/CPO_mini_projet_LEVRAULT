@@ -37,12 +37,12 @@ public class Cellule {
     }
 
     //reveler cellule
-    //getter
+    //setter
     public boolean getdevoilee(){
         return devoilee;
     }
     
-    //setter
+    //getter
     public void revelerCellule() {
         devoilee = true;
     }
