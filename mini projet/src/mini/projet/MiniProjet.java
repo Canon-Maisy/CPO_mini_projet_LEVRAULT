@@ -4,6 +4,7 @@
  */
 package mini.projet;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -18,46 +19,12 @@ public class MiniProjet {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        //test classe cellule
-        /*Cellule wouaf = new Cellule();
-        System.out.println("1: " + wouaf);
-
-        //révelement cellule
-        wouaf.revelerCellule();
-        System.out.println("2: " + wouaf);
-
-        //bombes autour
-        wouaf.SetBombesAutour(6);
-        System.out.println("4: " + wouaf);
-
-        //placement bombe
-        wouaf.placerBombe();
-        System.out.println("3: " + wouaf);*/
         //test classe GrilleDeJeu
         GrilleDeJeu miaou = new GrilleDeJeu(5, 5);
-        miaou.SetNbBombes(6);
-        miaou.placerBombesAléa();
-        miaou.calculerBombesAdj();
 
         //Boucle principale de jeu
         boolean Victoire = false;
-        /*while (Victoire){
-            int ligneChoisie = scanner.nextInt();
-            int colonneChoisie = scanner.nextInt();
-            
-            boolean celluleSure = miaou.revelerCellule(ligneChoisie, colonneChoisie);
-            
-            if (!celluleSure){
-                System.out.println("Boom");
-                break;
-            }
-            Victoire = miaou.toutesCellulesRevelees();
-            if (Victoire){
-                System.out.println("gagné");
-            }
-        }*/
-
-        while (!Victoire) {
+        /*while (!Victoire) {
             System.out.println("ligne");
             int ligneChoisie = scanner.nextInt();
             System.out.println("colonne");
@@ -67,14 +34,20 @@ public class MiniProjet {
             //vérifier si cellule dévoilée
             //si non, devoiler cellule
             //si bombe, break
-            System.out.println(miaou.getCase(ligneChoisie, colonneChoisie));
+            /*System.out.println(miaou.getCase(ligneChoisie, colonneChoisie));
             if (!miaou.getCase(ligneChoisie, colonneChoisie).getDevoilee()){
                 break;
             }
             
         }//Fin du while
-
+        */
         //miaou.revelerCellule(1, 1);
-        System.out.println(miaou);
+        //System.out.println(miaou);
+        Partie zasdfgh = new Partie(miaou);
+        int[] diff = zasdfgh.Difficulte();
+        int[] coos = zasdfgh.inputCoos();
+        System.out.println(Arrays.toString(coos));
+        zasdfgh.initialiserPartie(diff[0], diff[0], diff[1]);
+        // System.out.println(zasdfgh);
     }
 }
