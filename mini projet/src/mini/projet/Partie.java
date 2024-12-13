@@ -53,16 +53,20 @@ public class Partie {
 
     public int[] inputCoos() {
         System.out.println("ligne :");
-        int ligne = scanner.nextInt();
+        int ligne = scanner.nextInt() - 1;
         System.out.println("colonne :");
-        int colonne = scanner.nextInt();
+        int colonne = scanner.nextInt() - 1;
         return new int[]{ligne, colonne};
     }
 
-    public boolean tourDeJeu() {
+    public void tourDeJeu() {
         // demande des coordonnées de case au joueur
         int[] coos = inputCoos();
-        return vache.revelerCellule(coos[0],coos[1]);
+        vache.revelerCellule(coos[0],coos[1]);
+    }
+    
+    public boolean Victoire(){
+        return vache.toutesCellulesRevelees();
     }
 
     @Override

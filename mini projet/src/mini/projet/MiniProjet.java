@@ -27,12 +27,14 @@ public class MiniProjet {
         game.initialiserPartie(diff[0], diff[0], diff[1]);
         System.out.println(game);
 
-        
         boolean test = true;
-        while (test){
-        test = game.tourDeJeu();
-        System.out.println(game);}
-        
+        while (test) {
+            game.tourDeJeu();
+            System.out.println(game);
+            test = !game.Victoire();
+            System.out.println("test : " + test);
+        }
+
         System.out.println("fin de partie");
     }
 }
