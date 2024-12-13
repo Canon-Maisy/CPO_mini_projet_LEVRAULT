@@ -13,8 +13,8 @@ import java.util.Scanner;
 public class Partie {
 
     private GrilleDeJeu vache;
-    //private int NbVie;
-    //private String EtatPartie;
+//private int NbVie;
+//private String EtatPartie;
 
     public Partie(GrilleDeJeu grille) {
         this.vache = grille;
@@ -50,18 +50,19 @@ public class Partie {
         this.vache.calculerBombesAdj();
         return this.vache;
     }
-    
-    
-    public int[] inputCoos(){
+
+    public int[] inputCoos() {
         System.out.println("ligne :");
         int ligne = scanner.nextInt();
         System.out.println("colonne :");
         int colonne = scanner.nextInt();
-        return new int[] {ligne, colonne};
+        return new int[]{ligne, colonne};
     }
-    
-    public void tourDeJeu(){
+
+    public boolean tourDeJeu() {
+        // demande des coordonnées de case au joueur
         int[] coos = inputCoos();
+        return vache.revelerCellule(coos[0],coos[1]);
     }
 
     @Override

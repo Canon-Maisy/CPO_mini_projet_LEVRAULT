@@ -37,16 +37,20 @@ public class GrilleDeJeu {
         return nbLignes;
     }
 
-    public Cellule getCase(int ligne, int colonne){
+    public Cellule getCase(int ligne, int colonne) {
         return matriceCellules[ligne][colonne];
     }
-    
+
     public int getNbColonnes() {
         return nbColonnes;
     }
 
     public int getNbBombes() {
         return nbBombes;
+    }
+
+    public boolean getPresenceBombe(int i, int j) {
+        return matriceCellules[i][j].getPresenceBombe();
     }
 
     //setter
@@ -70,6 +74,7 @@ public class GrilleDeJeu {
         }
     }
 
+    //calcul nombre bombe adj pour chaque case
     public void calculerBombesAdj() {
         //parcours de la grille de jeu
         for (int ligne = 0; ligne < this.nbLignes; ligne++) {
@@ -84,6 +89,8 @@ public class GrilleDeJeu {
         }
     }
 
+    //fonction secondaire
+    //calcul nbr bombe adj à telle case
     public int BombesAutour(int ligne, int colonne) {
         int sommeBombes = 0;
         for (int i = -1; i <= 1; i++) { //parcours lignes autour
@@ -104,6 +111,8 @@ public class GrilleDeJeu {
         return sommeBombes;
     }
 
+    //revele la case donnée
+    //retourne un booléen si le joueur a perdu ou non
     public boolean revelerCellule(int ligne, int colonne) {
         //verifier si cellule devoilee
         if (!matriceCellules[ligne][colonne].getdevoilee()) {
@@ -137,10 +146,7 @@ public class GrilleDeJeu {
         return true;
     }
 
-    public boolean getPresenceBombe(int i, int j) {
-        return matriceCellules[i][j].getPresenceBombe();
-    }
-
+    //vérifie si toutes cellules sans bombes sont revelées
     public boolean toutesCellulesRevelees() {
         //parcours des cases de la grille
         for (int ligne = 0; ligne < nbLignes; ligne++) {
@@ -165,7 +171,8 @@ public class GrilleDeJeu {
         for (int i = 0; i < nbLignes; i++) {
             for (int j = 0; j < nbColonnes; j++) {
                 if (!matriceCellules[i][j].getdevoilee()) {
-                    Affichage += "?";
+                    //Affichage += "?";
+                    Affichage += "■";
                 } else if (matriceCellules[i][j].getPresenceBombe()) {
                     Affichage += "B";
                 } else if (matriceCellules[i][j].getBombesAutour() > 0) {
