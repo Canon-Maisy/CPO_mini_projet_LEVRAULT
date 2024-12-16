@@ -20,7 +20,7 @@ public class MiniProjet {
         Scanner scanner = new Scanner(System.in);
 
         //test classe GrilleDeJeu
-        GrilleDeJeu miaou = new GrilleDeJeu(5, 5);
+        /*GrilleDeJeu miaou = new GrilleDeJeu(5, 5);
 
         Partie game = new Partie(miaou);
         int[] diff = game.Difficulte();
@@ -35,6 +35,13 @@ public class MiniProjet {
             System.out.println("test : " + test);
         }
 
-        System.out.println("fin de partie");
+        System.out.println("fin de partie");*/
+        
+        Partie game = new Partie();
+        game.demarrerPartie();
+        
+        
+        
+        
     }
 }

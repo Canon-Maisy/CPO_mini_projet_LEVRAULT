@@ -152,8 +152,8 @@ public class GrilleDeJeu {
         for (int ligne = 0; ligne < nbLignes; ligne++) {
             for (int colonne = 0; colonne < nbColonnes; colonne++) {
                 //test si case sans bombe et pas dévoilée
-                if (!matriceCellules[ligne][colonne].getPresenceBombe() && !matriceCellules[ligne][colonne].getdevoilee()) {
-                    return false;
+                if (!matriceCellules[ligne][colonne].getPresenceBombe() && matriceCellules[ligne][colonne].getdevoilee()) {
+                    return false ;
                 }
             }
         }
