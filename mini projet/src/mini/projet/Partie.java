@@ -95,7 +95,7 @@ public class Partie {
             if (test == true){
                 test = !Victoire();
             }
-            System.out.println("test : " + test);
+            //System.out.println("test : " + test);
         }
         System.out.println("fin de partie :)");
     }
