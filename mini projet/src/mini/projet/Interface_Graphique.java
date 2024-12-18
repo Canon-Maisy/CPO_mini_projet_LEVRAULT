@@ -8,13 +8,13 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
-//import Cellulegraphique
 
 /**
  *
  * @author Maxime
  */
 public class Interface_Graphique extends javax.swing.JFrame {
+
     GrilleDeJeu grille;
 
     /**
@@ -22,31 +22,34 @@ public class Interface_Graphique extends javax.swing.JFrame {
      */
     public Interface_Graphique() {
         initComponents();
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
         int nbLignes = 10;
         int nbColonnes = 10;
         this.grille = new GrilleDeJeu(nbLignes, nbColonnes);
         initiliaserPartie();
-        PanneauGrille.setLayout(new GridLayout (nbLignes, nbColonnes));
-        
-        for (int i=0; i<nbLignes; i++){
-            for (int j=0; j<nbColonnes; j++){
-                CelluleGraphique bouton_cellule = new CelluleGraphique( grille.getCase(i, j), i,j);
+        PanneauGrille.setLayout(new GridLayout(nbLignes, nbColonnes));
+
+        for (int i = 0; i < nbLignes; i++) {
+            for (int j = 0; j < nbColonnes; j++) {
+                final int ligne = i;
+                final int colonne = j;
+                CelluleGraphique bouton_cellule = new CelluleGraphique(grille.getCase(i, j), i, j);
                 PanneauGrille.add(bouton_cellule); // ajout au Jpanel PanneauGrille
-                
-                /*ActionListener ecouteurClick;
-                ecouteurClick = new ActionListener(){
-                    
+
+                //ActionListener ecouteurClick;
+                //ecouteurClick = new ActionListener(){
+                bouton_cellule.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        grille.revelerCellule(x,y);
+                        grille.revelerCellule(ligne, colonne);
+                        bouton_cellule.repaint();
                         //System.out.println("Bouton Cliqué");
                     }
-                    
-                    
-                };*/    
+
+                });
             }
-            
-            
+
         }
     }
 
@@ -62,11 +65,14 @@ public class Interface_Graphique extends javax.swing.JFrame {
         PanneauGrille = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(600, 600));
+        setTitle("Démineur");
+        setMinimumSize(new java.awt.Dimension(720, 720));
+        setPreferredSize(new java.awt.Dimension(720, 720));
+        setSize(new java.awt.Dimension(720, 720));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         PanneauGrille.setBackground(new java.awt.Color(0, 204, 204));
-        getContentPane().add(PanneauGrille, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 360));
+        getContentPane().add(PanneauGrille, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 720));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -105,10 +111,9 @@ public class Interface_Graphique extends javax.swing.JFrame {
             }
         });
     }
-    
-    
-    public void initiliaserPartie(){
-        grille.SetNbBombes(7);
+
+    public void initiliaserPartie() {
+        grille.SetNbBombes(14);
         grille.placerBombesAléa();
         grille.calculerBombesAdj();
     }
