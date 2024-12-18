@@ -22,10 +22,14 @@ public class Interface_Graphique extends javax.swing.JFrame {
      */
     public Interface_Graphique() {
         initComponents();
-        this.setResizable(false);
-        this.setLocationRelativeTo(null);
+        //this.setResizable(true);
+        //this.setLocationRelativeTo(null);
+        
         int nbLignes = 10;
         int nbColonnes = 10;
+        getContentPane().add(PanneauGrille, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 20,nbColonnes*60, nbLignes*60));
+        this.pack();
+        this.revalidate();
         this.grille = new GrilleDeJeu(nbLignes, nbColonnes);
         initiliaserPartie();
         PanneauGrille.setLayout(new GridLayout(nbLignes, nbColonnes));
@@ -43,11 +47,13 @@ public class Interface_Graphique extends javax.swing.JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         grille.revelerCellule(ligne, colonne);
-                        bouton_cellule.repaint();
+                        PanneauGrille.revalidate();
+                        PanneauGrille.repaint();
                         //System.out.println("Bouton Cliqué");
                     }
 
                 });
+                //this.pack();
             }
 
         }

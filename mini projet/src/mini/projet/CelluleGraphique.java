@@ -27,7 +27,7 @@ public class CelluleGraphique extends JButton {
         super.paintComponent(g);
         
         if (!cellule.getdevoilee()){
-            this.setText("?");
+            this.setText("■");
         } else if (cellule.getPresenceBombe()){
             this.setText("B");
         } else if (cellule.getBombesAutour() > 0){

@@ -113,8 +113,8 @@ public class GrilleDeJeu {
 
     //revele la case donnée
     //retourne un booléen si le joueur a perdu ou non
-    public boolean revelerCellule(int ligne, int colonne) {
-        
+    public void revelerCellule(int ligne, int colonne) {
+        /*
         //verifier si cellule devoilee
         if (!matriceCellules[ligne][colonne].getdevoilee()) {
             //révélater la case
@@ -144,7 +144,29 @@ public class GrilleDeJeu {
                 }
             }
         }
-        return true;    
+        return true;*/
+
+        if (matriceCellules[ligne][colonne].getdevoilee()) {
+            return;
+        }
+        matriceCellules[ligne][colonne].revelerCellule();
+
+        if (matriceCellules[ligne][colonne].getPresenceBombe()) {
+            return;
+        }
+        if (matriceCellules[ligne][colonne].getBombesAutour() == 0) {
+            for (int i = -1; i <= 1; i++) {
+                for (int j = -1; j <= 1; j++) {
+                    int voisinLigne = ligne + i;
+                    int voisinColonne = colonne + j;
+
+                    if (voisinLigne >= 0 && voisinLigne < nbLignes
+                            && voisinColonne >= 0 && voisinColonne < nbColonnes) {
+                        revelerCellule(voisinLigne, voisinColonne);
+                    }
+                }
+            }
+        }
     }
 
     //vérifie si toutes cellules sans bombes sont revelées
@@ -154,7 +176,7 @@ public class GrilleDeJeu {
             for (int colonne = 0; colonne < nbColonnes; colonne++) {
                 //test si case sans bombe et pas dévoilée
                 if (!matriceCellules[ligne][colonne].getPresenceBombe() && matriceCellules[ligne][colonne].getdevoilee()) {
-                    return false ;
+                    return false;
                 }
             }
         }
