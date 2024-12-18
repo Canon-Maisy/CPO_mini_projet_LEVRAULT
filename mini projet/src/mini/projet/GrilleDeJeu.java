@@ -114,6 +114,7 @@ public class GrilleDeJeu {
     //revele la case donnée
     //retourne un booléen si le joueur a perdu ou non
     public boolean revelerCellule(int ligne, int colonne) {
+        
         //verifier si cellule devoilee
         if (!matriceCellules[ligne][colonne].getdevoilee()) {
             //révélater la case
@@ -143,7 +144,7 @@ public class GrilleDeJeu {
                 }
             }
         }
-        return true;
+        return true;    
     }
 
     //vérifie si toutes cellules sans bombes sont revelées
